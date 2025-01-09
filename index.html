@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,23 +9,56 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
         }
 
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
         }
 
-        .container {
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            border-bottom: 2px solid #444;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 14px 0;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #777;
+        }
+
+        .tab.active {
+            background-color: #4CAF50;
+        }
+
+        .section {
+            display: none;
             padding: 20px;
-            max-width: 800px;
-            margin: auto;
+            background-color: white;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .section.active {
+            display: block;
         }
 
         .product {
             text-align: center;
+            padding: 20px;
         }
 
         .product img {
@@ -58,14 +90,28 @@
         .btn:hover {
             background-color: #45a049;
         }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Votre Boutique - Aspirateur Portable</h1>
     </header>
 
     <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="showTab(0)">Description</div>
+            <div class="tab" onclick="showTab(1)">Caractéristiques</div>
+            <div class="tab" onclick="showTab(2)">Avis</div>
+            <div class="tab" onclick="showTab(3)">Acheter</div>
+        </div>
+
         <div class="product">
             <img src="https://via.placeholder.com/600x400" alt="Aspirateur Portable">
             <h1>Aspirateur Portable Sans Fil</h1>
@@ -74,13 +120,41 @@
                 Compact, léger, et puissant, il vous simplifie la vie au quotidien.
             </p>
             <p><strong>Prix : 49,99 €</strong></p>
+        </div>
 
+        <!-- Sections -->
+        <div class="section active">
+            <h2>Description</h2>
+            <p>
+                Ce modèle d'aspirateur portable sans fil est conçu pour offrir une expérience de nettoyage facile et efficace. Grâce à sa batterie longue durée, il peut être utilisé pour nettoyer les sols, les meubles, et même votre voiture.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Caractéristiques</h2>
+            <ul>
+                <li>Sans fil et rechargeable</li>
+                <li>Autonomie de 30 minutes</li>
+                <li>Poids léger (1,2 kg)</li>
+                <li>Accessoires inclus pour tous types de surfaces</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Avis</h2>
+            <p>Les utilisateurs apprécient particulièrement la légèreté et la puissance de cet aspirateur. Il est parfait pour un usage domestique et automobile.</p>
+            <p><strong>Note moyenne : 4,5/5</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>Acheter</h2>
+            <p>Ajoutez cet aspirateur à votre panier et profitez de la livraison gratuite.</p>
             <!-- Bouton PayPal -->
             <div id="paypal-button-container"></div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 20px; background-color: #f1f1f1;">
+    <footer>
         <p>&copy; 2025 Votre Boutique. Tous droits réservés.</p>
     </footer>
 
@@ -103,6 +177,22 @@
                 });
             }
         }).render('#paypal-button-container');
+
+        // Fonction pour afficher la section correspondant à l'onglet
+        function showTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.section');
+            
+            // Désactive toutes les tabs et sections
+            tabs.forEach(tab => tab.classList.remove('active'));
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Active la tab et la section correspondante
+            tabs[index].classList.add('active');
+            sections[index].classList.add('active');
+        }
     </script>
+
 </body>
 </html>
+
